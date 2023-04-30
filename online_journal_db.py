@@ -12,6 +12,20 @@ class OnlineJournalDB:
         cur = self.con.cursor()
         cur.execute(create_table_query)
 
+    #checking Id existence
+    def fetch_id(self,jid):
+        count = 0
+        fetchId_query = "SELECT JournalId FROM journals"
+        cur = self.con.cursor()
+        cur.execute(fetchId_query)
+        for row in cur:
+            if jid == int(row[0]):
+                count += 1
+        if count == 1:
+                return 1
+        else:
+            return 0
+
 
     #Inserting new journal
     def insert_journal(self, jid, jt, jw, jc, jp, j):
